@@ -2,10 +2,8 @@
 name = "geolocation-app"
 compatibility_date = "2024-04-05"
 
-# Configuration for your Pages site
-[pages]
 # The directory containing your static assets. This is the output of your Next.js build.
-main = "./app/.next"
+pages_build_output_dir = "./app/.next"
 
 # Configuration for your Worker (Hono API)
 [vars]
