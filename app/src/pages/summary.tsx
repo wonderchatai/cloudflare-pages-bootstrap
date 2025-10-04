@@ -74,6 +74,16 @@ export default function SummaryPage({ conversation }) {
             }}
           >{conversation}</ReactMarkdown>
         </div>
+
+        <div style={{ textAlign: 'center', marginTop: '2rem', borderTop: '1px solid #eee', paddingTop: '1rem' }}>
+          <p style={{ marginBottom: '0.5rem' }}>Explore the project:</p>
+          <Link href="https://github.com/wonderchatai/ta" target="_blank" rel="noopener noreferrer" style={{ color: '#3498db', textDecoration: 'none', fontWeight: 'bold', margin: '0 10px' }}>
+            View Code on GitHub
+          </Link>
+          <Link href="https://github.com/wonderchatai/ta/actions" target="_blank" rel="noopener noreferrer" style={{ color: '#2ecc71', textDecoration: 'none', fontWeight: 'bold', margin: '0 10px' }}>
+            View GitHub Actions Runs
+          </Link>
+        </div>
       </div>
       <footer style={{ marginTop: '2rem', textAlign: 'center', color: '#666', width: '100%' }}>
         Built with <a href="https://wonderchat.dev" target="_blank" rel="noopener noreferrer" style={{ color: '#3498db', textDecoration: 'none' }}>WonderChat</a>
@@ -83,6 +93,7 @@ export default function SummaryPage({ conversation }) {
 }
 
 export async function getStaticProps() {
+  // Correctly reference temp_conversation.md which is in the project root
   const markdownFilePath = path.join(process.cwd(), '..', 'temp_conversation.md');
   let conversation = '';
   try {
