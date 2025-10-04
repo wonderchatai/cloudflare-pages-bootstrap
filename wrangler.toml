@@ -1,5 +1,4 @@
-# Top-level configuration
-name = "geolocation-app"
+name = "cloudflare-pages-bootstrap"
 compatibility_date = "2024-04-05"
 
 # The directory containing your static assets. This is the output of your Next.js build.
@@ -8,3 +7,11 @@ pages_build_output_dir = "./app/out"
 # Configuration for your Worker (Hono API)
 [vars]
 # You can add any environment variables your Worker needs here
+
+# Bind your Worker to a service on a specific route.
+# The `functions` property points to the directory where your Worker code is.
+# The `route` property defines which paths will be handled by your Worker.
+[[services]]
+  binding = "api"
+  service = "api"
+  entrypoint = "api/src/index.ts"
