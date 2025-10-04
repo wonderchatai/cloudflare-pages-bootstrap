@@ -17,19 +17,12 @@ app.get('/api/location', (c) => {
   return c.json({ data: responseData, source: 'Cloudflare_Worker_Hono' });
 });
 
-// Temporarily add an explicit debug route for the root path
-app.get('/', (c) => {
-  return c.json({
-    message: 'Debug: Root path intercepted by Hono Worker',
-    path_received_by_worker: c.req.path,
-    full_url_received_by_worker: c.req.url,
-    userAgent: c.req.header('User-Agent'),
-    referer: c.req.header('Referer'),
-  });
-});
-
-// Original Fallback for static assets - this will now only be hit for non-/ and non-/api/location paths
+// Fallback for static assets.
+// This route will only be hit if no other Hono route matches.
+// We need to pass the request to the Pages static asset handler.
 app.get('*', async (c) => {
+  // c.env.ASSETS is a special binding provided by Cloudflare Pages for accessing static assets
+  // We need to ensure the context type is correct to access c.env.ASSETS
   return await (c.env as any).ASSETS.fetch(c.req.raw);
 });
 
