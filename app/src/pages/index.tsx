@@ -64,7 +64,7 @@ export default function HomePage() {
 
   return (
     <div style={{
-      fontFamily: ''Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif'',
+      fontFamily: "'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
       lineHeight: '1.6',
       display: 'flex',
       justifyContent: 'center',
