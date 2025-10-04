@@ -1,0 +1,40 @@
+
+name: Deploy to Cloudflare Pages
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    name: Deploy to Cloudflare Pages
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Or the version you prefer
+
+      - name: Install Frontend Dependencies
+        run: npm install
+        working-directory: ./app # Run in the 'app' sub-directory
+
+      - name: Build Frontend
+        run: npm run build
+        working-directory: ./app
+
+      # NOTE: No need to install/build the API separately.
+      # Wrangler CLI handles the API build based on wrangler.toml
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: "geolocation-app" # The name of your Pages project
+          command: pages deploy ./app/.next --commit-dirty=true
