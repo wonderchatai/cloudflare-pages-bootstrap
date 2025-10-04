@@ -1,5 +1,6 @@
 
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 
 export default function SummaryPage() {
   const conversation = `# Cloudflare Pages Full-Stack App Development: Conversation Log
@@ -86,7 +87,7 @@ npm error npx canceled due to missing packages and no YES option: ["wrangler@4.4
 \`\`\`
 
 **LLM Response (Excerpt):**
-The \`wrangler-action\` itself doesn't have a \`projectName\` input; that needs to be a flag within the \`command\` itself.
+The \`wrangler-action\` itself doesn\'t have a \`projectName\` input; that needs to be a flag within the \`command\` itself.
 *(Corrected \`.github/workflows/deploy.yml\` to include \`--project-name=geolocation-app\` in the \`command\` field.)*
 
 *(Subsequent deployment attempt revealed:)*
@@ -139,7 +140,7 @@ Still getting a 404 to /api/location
 \`\`\`
 
 **LLM Response (Excerpt):**
-The request to \`/api/location\` is **NOT being routed to our Cloudflare Worker at all**. Instead, it's being treated as a static page request by Cloudflare Pages. This points to a problem with how the \`[[services]]\` block in \`wrangler.toml\` is being interpreted (or ignored) by Cloudflare Pages during deployment.
+The request to \`/api/location\` is **NOT being routed to our Cloudflare Worker at all**. Instead, it\'s being treated as a static page request by Cloudflare Pages. This points to a problem with how the \`[[services]]\` block in \`wrangler.toml\` is being interpreted (or ignored) by Cloudflare Pages during deployment.
 
 **The Solution:** We adopted the **Pages Functions** model.
 1.  **Removed the \`[[services]]\` block from \`wrangler.toml\`**.
@@ -156,10 +157,10 @@ page is 404 now
 \`\`\`
 
 **LLM Response (Excerpt):**
-The \`_worker.js\` is active, but it's now intercepting *all* requests, including the one for your \`index.html\` from the Next.js app, and it doesn't know how to serve the static files.
+The \`_worker.js\` is active, but it\'s now intercepting *all* requests, including the one for your \`index.html\` from the Next.js app, and it doesn\'t know how to serve the static files.
 
-**The Solution:** Tell the Worker to **pass through requests that don't match an API route to the Pages static asset handler.**
-*(Modified Hono's catch-all route in \`api/src/index.ts\` to use \`c.env.ASSETS.fetch(c.req.raw)\`.)*
+**The Solution:** Tell the Worker to **pass through requests that don\'t match an API route to the Pages static asset handler.**
+*(Modified Hono\'s catch-all route in \`api/src/index.ts\` to use \`c.env.ASSETS.fetch(c.req.raw)\`.)*
 
 ---
 
@@ -190,7 +191,7 @@ Type error: ',' expected.
 
 **LLM Response (Excerpt):**
 The error is a classic syntax mistake when dealing with nested quotes in a JavaScript string. The outer single quotes conflict with the inner single quotes.
-*(Corrected \`fontFamily\` string in \`app/src/pages/index.tsx\` to use double quotes: \`"\'Segoe UI\', ..." \`)*
+*(Corrected \`fontFamily\` string in \`app/src/pages/index.tsx\` to use double quotes: \`"\'Segoe UI\', ..."\`)*
 
 ---
 
@@ -210,7 +211,7 @@ This log outlines the progression, challenges, and ultimate solutions to success
       </div>
 
       <div style={{ background: '#e8f0fe', padding: '1.5rem', borderRadius: '8px', overflowX: 'auto' }}>
-        <pre><code dangerouslySetInnerHTML={{ __html: conversation }}></code></pre>
+        <ReactMarkdown>{conversation}</ReactMarkdown>
       </div>
     </div>
   );
