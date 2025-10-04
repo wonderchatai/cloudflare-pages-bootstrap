@@ -28,6 +28,15 @@ jobs:
         run: npm run build
         working-directory: ./app
 
+      - name: Debug: List app directory after frontend build
+        run: ls -lR ./app
+        working-directory: ./ # Run from root to ensure path is correct
+
+      - name: Debug: List app/out directory after frontend build
+        run: ls -lR ./app/out
+        working-directory: ./ # Run from root to ensure path is correct
+        continue-on-error: true # Allow this step to fail if app/out doesn't exist yet
+
       - name: Install API Dependencies
         run: npm install
         working-directory: ./api # Run in the 'api' sub-directory
@@ -38,7 +47,11 @@ jobs:
 
       # This is the crucial change: copy the compiled worker to app/out/_worker.js
       - name: Copy Built API to Pages Root Worker File
-        run: cp ./api/dist/index.js ./app/out/_worker.js
+        run: mkdir -p ./app/out && cp ./api/dist/index.js ./app/out/_worker.js
+
+      - name: Debug: List app/out directory before deploy
+        run: ls -lR ./app/out
+        working-directory: ./ # Run from root to ensure path is correct
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
