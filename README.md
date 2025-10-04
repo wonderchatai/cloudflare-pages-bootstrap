@@ -1,3 +1,9 @@
+**Built with [WonderChat AI](https://wonderchat.dev).**
+
+<a href="https://apps.apple.com/us/app/wonderchat-ai/id6752497385" target="_blank">
+  <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" height="50">
+</a>
+
 # Cloudflare Pages Full-Stack Geo-Location App
 
 This project demonstrates a full-stack web application deployed on Cloudflare Pages, leveraging Next.js for the frontend and Hono running as a Cloudflare Pages Function (Worker) for the backend API.
