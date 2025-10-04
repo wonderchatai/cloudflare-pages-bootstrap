@@ -41,7 +41,8 @@ export default function HomePage() {
     const { clientIp, country, city, region, latitude, longitude, timezone } = locationData;
 
     return (
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+      // Changed from grid to flex column for mobile responsiveness
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
         <div style={dataCardStyle}><strong>IP Address:</strong> {clientIp || 'N/A'}</div>
         <div style={dataCardStyle}><strong>Country:</strong> {country || 'N/A'}</div>
         <div style={dataCardStyle}><strong>City:</strong> {city || 'N/A'}</div>
