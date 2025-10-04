@@ -2,7 +2,7 @@
 name: Deploy to Cloudflare Pages
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # This line and the next are the focus of the fix
 
 jobs:
   deploy:
