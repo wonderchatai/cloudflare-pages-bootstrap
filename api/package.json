@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "deploy": "wrangler deploy",
-    "start": "wrangler dev"
+    "start": "wrangler dev",
+    "build": "esbuild src/index.ts --bundle --outfile=dist/index.js --format=esm --platform=browser"
   },
   "dependencies": {
     "hono": "^4.2.5"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240405.0",
-    "wrangler": "^3.47.0"
+    "wrangler": "^3.47.0",
+    "esbuild": "^0.20.2" # Added esbuild
   }
 }

@@ -28,8 +28,19 @@ jobs:
         run: npm run build
         working-directory: ./app
 
-      # NOTE: No need to install/build the API separately.
-      # Wrangler CLI handles the API build based on wrangler.toml
+      - name: Install API Dependencies
+        run: npm install
+        working-directory: ./api # Run in the 'api' sub-directory
+
+      - name: Build API (Hono Worker)
+        run: npm run build
+        working-directory: ./api
+
+      - name: Create Functions Directory in Frontend Output
+        run: mkdir -p ./app/out/_worker
+
+      - name: Copy Built API to Frontend Functions Directory
+        run: cp ./api/dist/index.js ./app/out/_worker/index.js
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
