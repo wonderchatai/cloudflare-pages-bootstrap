@@ -1,7 +1,7 @@
 name: Deploy to Cloudflare Pages
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Trigger manually from GitHub Actions UI - Updated 2024-05-15-10-30
 
 jobs:
   deploy:
