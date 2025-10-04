@@ -13,34 +13,44 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
       - name: Install Frontend Dependencies
         run: npm install
         working-directory: ./app
+
       - name: Build Frontend
         run: npm run build
         working-directory: ./app
+
       - name: Debug: List app directory after frontend build
         run: ls -lR ./app
         working-directory: ./
+
       - name: Debug: List app/out directory after frontend build
         run: ls -lR ./app/out
         working-directory: ./
         continue-on-error: true
+
       - name: Install API Dependencies
         run: npm install
         working-directory: ./api
+
       - name: Build API (Hono Worker)
         run: npm run build
         working-directory: ./api
+
       - name: Copy Built API to Pages Root Worker File
         run: mkdir -p ./app/out && cp ./api/dist/index.js ./app/out/_worker.js
+
       - name: Debug: List app/out directory before deploy
         run: ls -lR ./app/out
         working-directory: ./
+
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
