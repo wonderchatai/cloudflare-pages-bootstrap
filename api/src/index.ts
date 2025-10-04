@@ -11,15 +11,24 @@ app.get('/api/location', (c) => {
   // Combine or prioritize clientIp
   const responseData = {
     ...cfData,
-    clientIp: clientIpFromHeader || cfData.clientIp || 'N/A_from_header', // Prioritize header IP
+    clientIp: clientIpFromHeader || cfData.clientIp || 'N/A_from_header',
   };
 
   return c.json({ data: responseData, source: 'Cloudflare_Worker_Hono' });
 });
 
-// Fallback for static assets.
-// This route will only be hit if no other Hono route matches.
-// We need to pass the request to the Pages static asset handler.
+// Temporarily add an explicit debug route for the root path
+app.get('/', (c) => {
+  return c.json({
+    message: 'Debug: Root path intercepted by Hono Worker',
+    path_received_by_worker: c.req.path,
+    full_url_received_by_worker: c.req.url,
+    userAgent: c.req.header('User-Agent'),
+    referer: c.req.header('Referer'),
+  });
+});
+
+// Original Fallback for static assets - this will now only be hit for non-/ and non-/api/location paths
 app.get('*', async (c) => {
   return await (c.env as any).ASSETS.fetch(c.req.raw);
 });
