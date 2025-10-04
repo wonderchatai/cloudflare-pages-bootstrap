@@ -36,5 +36,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: "geolocation-app" # The name of your Pages project
-          command: pages deploy ./app/.next --commit-dirty=true
+          command: pages deploy ./app/.next --project-name=geolocation-app --commit-dirty=true
