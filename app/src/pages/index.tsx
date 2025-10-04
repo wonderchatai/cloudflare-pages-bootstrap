@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Head from 'next/head'; // Import Head for title
 
 export default function HomePage() {
   const [locationData, setLocationData] = useState(null);
@@ -16,7 +17,7 @@ export default function HomePage() {
         return res.json();
       })
       .then((data) => {
-        setLocationData(data.data); // Assuming the Hono API returns { data: cf_object }
+        setLocationData(data.data);
         setLoading(false);
       })
       .catch((e) => {
@@ -35,9 +36,8 @@ export default function HomePage() {
     }
     if (!locationData) {
       return <p style={{ textAlign: 'center', fontSize: '1.2em' }}>No location data available.</p>;
-    }
+    };
 
-    // Destructure relevant data for display
     const { clientIp, country, city, region, latitude, longitude, timezone } = locationData;
 
     return (
@@ -68,6 +68,7 @@ export default function HomePage() {
       fontFamily: "'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
       lineHeight: '1.6',
       display: 'flex',
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
       minHeight: '100vh',
@@ -75,6 +76,9 @@ export default function HomePage() {
       padding: '2rem',
       boxSizing: 'border-box'
     }}>
+      <Head>
+        <title>Prompting Cloudflare App using WonderChat</title>
+      </Head>
       <div style={{
         maxWidth: '800px',
         width: '100%',
@@ -92,10 +96,13 @@ export default function HomePage() {
 
         <div style={{ textAlign: 'center', marginTop: '2rem' }}>
           <Link href="/summary" style={{ display: 'inline-block', padding: '0.8rem 1.5rem', background: '#2ecc71', color: 'white', textDecoration: 'none', borderRadius: '5px', fontWeight: 'bold' }}>
-            View LLM Conversation Summary
+            View LLM Conversation Log
           </Link>
         </div>
       </div>
+      <footer style={{ marginTop: '2rem', textAlign: 'center', color: '#666' }}>
+        Built with <a href="https://wonderchat.dev" target="_blank" rel="noopener noreferrer" style={{ color: '#3498db', textDecoration: 'none' }}>WonderChat</a>
+      </footer>
     </div>
   );
 }
