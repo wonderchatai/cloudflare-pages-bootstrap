@@ -1,7 +1,7 @@
 name: Deploy to Cloudflare Pages
 
 on:
-  workflow_dispatch: # Trigger manually from GitHub Actions UI - Updated 2024-05-15-10-30
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -37,10 +37,6 @@ jobs:
 
       - name: Copy Built API to Pages Root Worker File
         run: mkdir -p ./app/out && cp ./api/dist/index.js ./app/out/_worker.js
-
-      - name: Debug: Final app/out directory structure
-        run: ls -lR ./app/out
-        working-directory: ./
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
