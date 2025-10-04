@@ -95,14 +95,14 @@ export default function HomePage() {
         </h1>
         {renderData()}
 
-        {/* Temporarily commented out Link to Summary Page */}
-        {/*
+        {/* Link to Summary Page */}
+        
         <div style={{ textAlign: 'center', marginTop: '2rem' }}>
           <Link href="/summary" style={{ display: 'inline-block', padding: '0.8rem 1.5rem', background: '#2ecc71', color: 'white', textDecoration: 'none', borderRadius: '5px', fontWeight: 'bold' }}>
             View LLM Conversation Log
           </Link>
         </div>
-        */}
+        
       </div>
       <footer style={{ marginTop: '2rem', textAlign: 'center', color: '#666' }}>
         Built with <a href="https://wonderchat.dev" target="_blank" rel="noopener noreferrer" style={{ color: '#3498db', textDecoration: 'none' }}>WonderChat</a>
