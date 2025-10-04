@@ -1,5 +1,5 @@
 
-import Link from \'next/link\';
+import Link from 'next/link';
 
 export default function SummaryPage() {
   const conversation = `
@@ -199,18 +199,18 @@ This log outlines the progression, challenges, and ultimate solutions to success
 `;
 
   return (
-    <div style={{ fontFamily: "\"\'Segoe UI\', Roboto, Oxygen, Ubuntu, Cantarell, \'Fira Sans\', \'Droid Sans\', \'Helvetica Neue\', sans-serif\"", lineHeight: \'1.6\', padding: \'2rem\', maxWidth: \'1000px\', margin: \'0 auto\', background: \'#f9f9f9\', borderRadius: \'10px\', boxShadow: \'0 5px 25px rgba(0,0,0,0.1)\' }}>
-      <h1 style={{ textAlign: \'center\', color: \'#2c3e50\', marginBottom: \'2rem\', fontSize: \'2.5em\' }}>
-        <span style={{ color: \'#3498db\' }}>Cloudflare</span> App Development <span style={{ color: \'#2ecc71\' }}>Log</span>
+    <div style={{ fontFamily: "'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif", lineHeight: '1.6', padding: '2rem', maxWidth: '1000px', margin: '0 auto', background: '#f9f9f9', borderRadius: '10px', boxShadow: '0 5px 25px rgba(0,0,0,0.1)' }}>
+      <h1 style={{ textAlign: 'center', color: '#2c3e50', marginBottom: '2rem', fontSize: '2.5em' }}>
+        <span style={{ color: '#3498db' }}>Cloudflare</span> App Development <span style={{ color: '#2ecc71' }}>Log</span>
       </h1>
 
-      <div style={{ marginBottom: \'2rem\' }}>
-        <Link href=\"/\" style={{ display: \'inline-block\', padding: \'0.8rem 1.5rem\', background: \'#3498db\', color: \'white\', textDecoration: \'none\', borderRadius: \'5px\', fontWeight: \'bold\' }}>
+      <div style={{ marginBottom: '2rem' }}>
+        <Link href="/" style={{ display: 'inline-block', padding: '0.8rem 1.5rem', background: '#3498db', color: 'white', textDecoration: 'none', borderRadius: '5px', fontWeight: 'bold' }}>
           &larr; Back to GeoLocation Info
         </Link>
       </div>
 
-      <div style={{ background: \'#e8f0fe\', padding: \'1.5rem\', borderRadius: \'8px\', overflowX: \'auto\' }}>
+      <div style={{ background: '#e8f0fe', padding: '1.5rem', borderRadius: '8px', overflowX: 'auto' }}>
         <pre><code dangerouslySetInnerHTML={{ __html: conversation }}></code></pre>
       </div>
     </div>
