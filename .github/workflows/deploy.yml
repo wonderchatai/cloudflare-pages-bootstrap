@@ -2,7 +2,7 @@
 name: Deploy to Cloudflare Pages
 
 on:
-  workflow_dispatch: # This line and the next are the focus of the fix
+  workflow_dispatch: # Trigger manually from GitHub Actions UI
 
 jobs:
   deploy:
