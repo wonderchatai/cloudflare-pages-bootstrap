@@ -1,0 +1,24 @@
+
+name: Create Cloudflare Pages Project
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-project:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    name: Create Cloudflare Pages Project
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create Pages Project
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # This command creates the project. It's safe to re-run;
+          # it will just report success if the project already exists.
+          command: pages project create geolocation-app --production-branch main
