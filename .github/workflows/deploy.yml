@@ -38,7 +38,7 @@ jobs:
       - name: Copy Built API to Pages Root Worker File
         run: mkdir -p ./app/out && cp ./api/dist/index.js ./app/out/_worker.js
 
-      - name: Debug: Final app/out directory structure
+      - name: 'Debug: Final app/out directory structure' # Fixed: Added quotes around the name
         run: ls -lR ./app/out
         working-directory: ./
 
