@@ -15,7 +15,7 @@ export default function HomePage() {
         return res.json();
       })
       .then((data) => {
-        setLocationData(data.data); // Keep data.data to see the raw cf object
+        setLocationData(data.data); // Assuming the Hono API returns { data: cf_object }
         setLoading(false);
       })
       .catch((e) => {
@@ -36,12 +36,30 @@ export default function HomePage() {
       return <p style={{ textAlign: 'center', fontSize: '1.2em' }}>No location data available.</p>;
     }
 
-    // Display the full raw JSON for debugging
+    // Destructure relevant data for display
+    const { clientIp, country, city, region, latitude, longitude, timezone } = locationData;
+
     return (
-      <pre style={{ background: '#fafafa', padding: '1.5rem', borderRadius: '8px', whiteSpace: 'pre-wrap', overflowX: 'auto' }}>
-        {JSON.stringify(locationData, null, 2)}
-      </pre>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+        <div style={dataCardStyle}><strong>IP Address:</strong> {clientIp || 'N/A'}</div>
+        <div style={dataCardStyle}><strong>Country:</strong> {country || 'N/A'}</div>
+        <div style={dataCardStyle}><strong>City:</strong> {city || 'N/A'}</div>
+        <div style={dataCardStyle}><strong>Region:</strong> {region || 'N/A'}</div>
+        <div style={dataCardStyle}><strong>Latitude:</strong> {latitude || 'N/A'}</div>
+        <div style={dataCardStyle}><strong>Longitude:</strong> {longitude || 'N/A'}</div>
+        <div style={dataCardStyle}><strong>Timezone:</strong> {timezone || 'N/A'}</div>
+      </div>
     );
+  };
+
+  const dataCardStyle = {
+    background: '#fff',
+    padding: '1.5rem',
+    borderRadius: '10px',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+    borderLeft: '5px solid #3498db',
+    fontSize: '1.1em',
+    color: '#333',
   };
 
   return (
