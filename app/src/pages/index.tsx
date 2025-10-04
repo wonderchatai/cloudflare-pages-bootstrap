@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function HomePage() {
   const [locationData, setLocationData] = useState(null);
@@ -88,6 +89,12 @@ export default function HomePage() {
           <span style={{ color: '#3498db' }}>Geo</span>Location <span style={{ color: '#2ecc71' }}>Info</span>
         </h1>
         {renderData()}
+
+        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <Link href="/summary" style={{ display: 'inline-block', padding: '0.8rem 1.5rem', background: '#2ecc71', color: 'white', textDecoration: 'none', borderRadius: '5px', fontWeight: 'bold' }}>
+            View LLM Conversation Summary
+          </Link>
+        </div>
       </div>
     </div>
   );
