@@ -3,12 +3,20 @@ import { Hono } from 'hono';
 
 const app = new Hono();
 
-// The path should be what's left AFTER the service binding route is stripped.
-// The browser requests /api/location, Pages routes it, and the worker receives /location.
+// The specific route we want to hit.
 app.get('/location', (c) => {
-  // The `cf` object is automatically provided by Cloudflare
   const locationData = c.req.raw.cf;
-  return c.json(locationData);
+  return c.json({ data: locationData, source: 'specific_route' });
+});
+
+// Add a catch-all route for debugging.
+// This will return the exact path the worker received.
+app.get('*', (c) => {
+  return c.json({
+    message: 'Debug Info: Catch-all route triggered',
+    path_received_by_worker: c.req.path,
+    full_url_received_by_worker: c.req.url,
+  });
 });
 
 export default app;
