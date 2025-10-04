@@ -17,13 +17,33 @@ app.get('/api/location', (c) => {
   return c.json({ data: responseData, source: 'Cloudflare_Worker_Hono' });
 });
 
-// Fallback for static assets.
-// This route will only be hit if no other Hono route matches.
-// We need to pass the request to the Pages static asset handler.
+// Fallback for static assets with debug reporting
 app.get('*', async (c) => {
-  // c.env.ASSETS is a special binding provided by Cloudflare Pages for accessing static assets
-  // We need to ensure the context type is correct to access c.env.ASSETS
-  return await (c.env as any).ASSETS.fetch(c.req.raw);
+  try {
+    const assetResponse = await (c.env as any).ASSETS.fetch(c.req.raw);
+
+    if (assetResponse.ok) {
+      return assetResponse;
+    } else {
+      // If ASSETS.fetch returns a non-OK status, report it
+      const errorText = await assetResponse.text();
+      return c.json({
+        message: `Debug: ASSETS.fetch returned non-OK status for ${c.req.path}`,
+        status: assetResponse.status,
+        statusText: assetResponse.statusText,
+        assetPath: c.req.path,
+        responseText: errorText.substring(0, 200) + (errorText.length > 200 ? '...' : ''), // Truncate long responses
+      }, 500); // Return a 500 for internal asset fetching issues
+    }
+  } catch (error: any) {
+    // If ASSETS.fetch throws an error
+    return c.json({
+      message: `Debug: ASSETS.fetch threw an error for ${c.req.path}`,
+      errorName: error.name,
+      errorMessage: error.message,
+      assetPath: c.req.path,
+    }, 500); // Return a 500 for internal errors
+  }
 });
 
 export default app;
