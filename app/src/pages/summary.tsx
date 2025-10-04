@@ -2,8 +2,7 @@
 import Link from 'next/link';
 
 export default function SummaryPage() {
-  const conversation = `
-# Cloudflare Pages Full-Stack App Development: Conversation Log
+  const conversation = `# Cloudflare Pages Full-Stack App Development: Conversation Log
 
 This document captures key interactions, challenges, and resolutions encountered during the development of a GeoLocation app using Next.js (frontend) and Hono (backend) deployed on Cloudflare Pages.
 
@@ -74,7 +73,7 @@ The deployment process is highly automated, leveraging your Git repository and t
 
 ---
 
-## 5. First Deployment Error: `projectName` & Project Not Found
+## 5. First Deployment Error: \`projectName\` & Project Not Found
 
 **User Prompt:**
 *(After first deployment attempt)*
@@ -87,8 +86,8 @@ npm error npx canceled due to missing packages and no YES option: ["wrangler@4.4
 \`\`\`
 
 **LLM Response (Excerpt):**
-The `wrangler-action` itself doesn't have a `projectName` input; that needs to be a flag within the `command` itself.
-*(Corrected \`.github/workflows/deploy.yml\` to include \`--project-name=geolocation-app\` in the `command` field.)*
+The \`wrangler-action\` itself doesn't have a \`projectName\` input; that needs to be a flag within the \`command\` itself.
+*(Corrected \`.github/workflows/deploy.yml\` to include \`--project-name=geolocation-app\` in the \`command\` field.)*
 
 *(Subsequent deployment attempt revealed:)*
 \`\`\`
@@ -145,7 +144,7 @@ The request to \`/api/location\` is **NOT being routed to our Cloudflare Worker 
 **The Solution:** We adopted the **Pages Functions** model.
 1.  **Removed the \`[[services]]\` block from \`wrangler.toml\`**.
 2.  **Added \`esbuild\`** to \`api/package.json\` and a build script to compile \`api/src/index.ts\` into plain JavaScript.
-3.  **Modified \`.github/workflows/deploy.yml\`** to build the Hono worker and copy its *compiled output* (`./api/dist/index.js`) into the Next.js \`app/out/_worker.js\` file. This \`_worker.js\` file acts as the primary Pages Function.
+3.  **Modified \`.github/workflows/deploy.yml\`** to build the Hono worker and copy its *compiled output* (\`./api/dist/index.js\`) into the Next.js \`app/out/_worker.js\` file. This \`_worker.js\` file acts as the primary Pages Function.
 
 ---
 
@@ -157,7 +156,7 @@ page is 404 now
 \`\`\`
 
 **LLM Response (Excerpt):**
-The `_worker.js` is active, but it's now intercepting *all* requests, including the one for your `index.html` from the Next.js app, and it doesn't know how to serve the static files.
+The \`_worker.js\` is active, but it's now intercepting *all* requests, including the one for your \`index.html\` from the Next.js app, and it doesn't know how to serve the static files.
 
 **The Solution:** Tell the Worker to **pass through requests that don't match an API route to the Pages static asset handler.**
 *(Modified Hono's catch-all route in \`api/src/index.ts\` to use \`c.env.ASSETS.fetch(c.req.raw)\`.)*
