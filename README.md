@@ -39,8 +39,8 @@ This project uses GitHub Actions for automated CI/CD to Cloudflare Pages. Key as
 
 ### Project Links
 
-*   **GitHub Repository:** [https://github.com/wonderchatai/ta](https://github.com/wonderchatai/ta)
-*   **GitHub Actions Runs:** [https://github.com/wonderchatai/ta/actions](https://github.com/wonderchatai/ta/actions)
+*   **GitHub Repository:** [https://github.com/wonderchatai/cloudflare-pages-bootstrap](https://github.com/wonderchatai/cloudflare-pages-bootstrap)
+*   **GitHub Actions Runs:** [https://github.com/wonderchatai/cloudflare-pages-bootstrap/actions](https://github.com/wonderchatai/cloudflare-pages-bootstrap/actions)
 *   **Live Application:** [https://geolocation-app.pages.dev](https://geolocation-app.pages.dev)
 
 Built with [WonderChat](https://wonderchat.dev)
