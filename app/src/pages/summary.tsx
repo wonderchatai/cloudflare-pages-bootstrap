@@ -43,6 +43,20 @@ export default function SummaryPage({ conversation }) {
           </Link>
         </div>
 
+        {/* Add the screenshot here */}
+        <img
+          src="/wonderchat_initial_prompt.png"
+          alt="WonderChat Initial Prompt"
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+            display: 'block',
+            margin: '0 auto 2rem auto',
+            borderRadius: '8px',
+            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+          }}
+        />
+
         <div style={{
           background: '#e8f0fe',
           padding: '1.5rem',
@@ -69,9 +83,14 @@ export default function SummaryPage({ conversation }) {
 }
 
 export async function getStaticProps() {
-  // Correctly reference temp_conversation.md which is in the project root
   const markdownFilePath = path.join(process.cwd(), '..', 'temp_conversation.md');
-  const conversation = fs.readFileSync(markdownFilePath, 'utf8');
+  let conversation = '';
+  try {
+    conversation = fs.readFileSync(markdownFilePath, 'utf8');
+  } catch (error) {
+    console.error("Error reading Markdown file:", error);
+    conversation = "Error loading conversation log. Please check the file path.";
+  }
 
   return {
     props: {
