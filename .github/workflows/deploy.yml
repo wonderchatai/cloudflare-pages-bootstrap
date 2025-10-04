@@ -36,11 +36,9 @@ jobs:
         run: npm run build
         working-directory: ./api
 
-      - name: Create Functions Directory in Frontend Output
-        run: mkdir -p ./app/out/_worker
-
-      - name: Copy Built API to Frontend Functions Directory
-        run: cp ./api/dist/index.js ./app/out/_worker/index.js
+      # This is the crucial change: copy the compiled worker to app/out/_worker.js
+      - name: Copy Built API to Pages Root Worker File
+        run: cp ./api/dist/index.js ./app/out/_worker.js
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

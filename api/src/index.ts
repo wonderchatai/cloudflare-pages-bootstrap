@@ -4,7 +4,7 @@ import { Hono } from 'hono';
 const app = new Hono();
 
 // The specific route we want to hit.
-app.get('/location', (c) => {
+app.get('/api/location', (c) => {
   const locationData = c.req.raw.cf;
   return c.json({ data: locationData, source: 'specific_route' });
 });
