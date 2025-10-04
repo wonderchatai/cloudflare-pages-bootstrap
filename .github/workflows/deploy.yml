@@ -27,15 +27,6 @@ jobs:
         run: npm run build
         working-directory: ./app
 
-      - name: Debug: List app directory after frontend build
-        run: ls -lR ./app
-        working-directory: ./
-
-      - name: Debug: List app/out directory after frontend build
-        run: ls -lR ./app/out
-        working-directory: ./
-        continue-on-error: true
-
       - name: Install API Dependencies
         run: npm install
         working-directory: ./api
@@ -47,7 +38,7 @@ jobs:
       - name: Copy Built API to Pages Root Worker File
         run: mkdir -p ./app/out && cp ./api/dist/index.js ./app/out/_worker.js
 
-      - name: Debug: List app/out directory before deploy
+      - name: Debug: Final app/out directory structure
         run: ls -lR ./app/out
         working-directory: ./
 
