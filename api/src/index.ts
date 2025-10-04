@@ -22,17 +22,22 @@ app.get('*', async (c) => {
   try {
     const assetResponse = await (c.env as any).ASSETS.fetch(c.req.raw);
 
+    // Explicitly handle 304 as a successful pass-through
+    if (assetResponse.status === 304) {
+      return assetResponse; // Return the 304 response directly
+    }
+
     if (assetResponse.ok) {
       return assetResponse;
     } else {
-      // If ASSETS.fetch returns a non-OK status, report it
+      // For other non-OK statuses (4xx, 5xx), report it
       const errorText = await assetResponse.text();
       return c.json({
-        message: `Debug: ASSETS.fetch returned non-OK status for ${c.req.path}`,
+        message: `Debug: ASSETS.fetch returned non-OK status (${assetResponse.status}) for ${c.req.path}`,
         status: assetResponse.status,
         statusText: assetResponse.statusText,
         assetPath: c.req.path,
-        responseText: errorText.substring(0, 200) + (errorText.length > 200 ? '...' : ''), // Truncate long responses
+        responseText: errorText.substring(0, 200) + (errorText.length > 200 ? '...' : ''),
       }, 500); // Return a 500 for internal asset fetching issues
     }
   } catch (error: any) {
@@ -42,7 +47,7 @@ app.get('*', async (c) => {
       errorName: error.name,
       errorMessage: error.message,
       assetPath: c.req.path,
-    }, 500); // Return a 500 for internal errors
+    }, 500);
   }
 });
 
