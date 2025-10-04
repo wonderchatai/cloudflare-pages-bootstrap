@@ -69,7 +69,8 @@ export default function SummaryPage({ conversation }) {
 }
 
 export async function getStaticProps() {
-  const markdownFilePath = path.join(process.cwd(), 'temp_conversation.md');
+  // Correctly reference temp_conversation.md which is in the project root
+  const markdownFilePath = path.join(process.cwd(), '..', 'temp_conversation.md');
   const conversation = fs.readFileSync(markdownFilePath, 'utf8');
 
   return {
