@@ -16,7 +16,7 @@ export default function SummaryPage({ conversation }) {
       alignItems: 'center',
       minHeight: '100vh',
       background: 'linear-gradient(to right, #ece9e6, #ffffff)',
-      padding: '2rem',
+      padding: '1rem', // Adjusted outer padding for more mobile space
       boxSizing: 'border-box'
     }}>
       <Head>
@@ -25,7 +25,7 @@ export default function SummaryPage({ conversation }) {
       <div style={{
         maxWidth: '800px',
         width: '100%',
-        padding: '2.5rem',
+        padding: '1rem', // Adjusted inner padding for more mobile space
         borderRadius: '15px',
         background: 'rgba(255, 255, 255, 0.9)',
         boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
@@ -59,7 +59,7 @@ export default function SummaryPage({ conversation }) {
 
         <div style={{
           background: '#e8f0fe',
-          padding: '1.5rem',
+          padding: '1rem', // Adjusted padding for markdown block
           borderRadius: '8px',
           overflowX: 'auto',
           fontSize: '0.9em',
@@ -69,8 +69,8 @@ export default function SummaryPage({ conversation }) {
         }}>
           <ReactMarkdown
             components={{
-              pre: ({ node, ...props }) => <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }} {...props} />,
-              code: ({ node, ...props }) => <code style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }} {...props} />,
+              pre: ({ node, ...props }) => <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', maxWidth: '100%', overflowX: 'auto' }} {...props} />,
+              code: ({ node, ...props }) => <code style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', maxWidth: '100%', overflowX: 'auto' }} {...props} />,
             }}
           >{conversation}</ReactMarkdown>
         </div>
@@ -93,7 +93,6 @@ export default function SummaryPage({ conversation }) {
 }
 
 export async function getStaticProps() {
-  // Correctly reference temp_conversation.md which is in the project root
   const markdownFilePath = path.join(process.cwd(), '..', 'temp_conversation.md');
   let conversation = '';
   try {
