@@ -3,7 +3,7 @@ name = "geolocation-app"
 compatibility_date = "2024-04-05"
 
 # The directory containing your static assets. This is the output of your Next.js build.
-pages_build_output_dir = "./app/.next"
+pages_build_output_dir = "./app/out"
 
 # Configuration for your Worker (Hono API)
 [vars]

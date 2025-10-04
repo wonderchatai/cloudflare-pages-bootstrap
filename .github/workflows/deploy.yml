@@ -36,4 +36,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./app/.next --project-name=geolocation-app --commit-dirty=true
+          command: pages deploy ./app/out --project-name=geolocation-app --commit-dirty=true
